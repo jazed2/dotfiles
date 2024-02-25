@@ -28,13 +28,17 @@ source $HOME/.config/zsh/exports.zsh
 source $HOME/.config/zsh/func.zsh
 #
 # ZSH Syntax Highlighting
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 #
 # Aliases
 source $HOME/.config/zsh/aliases.zsh
 #	
 # Zoxide init
 source $HOME/.config/zsh/zoxide.zsh
+#
+# Garuda Linux Extra
+source $HOME/.config/zsh/garudaExtras.zsh
+#
 #
 # Starship prompt
 eval "$(starship init zsh)"
