@@ -46,3 +46,4 @@ source $HOME/.config/zsh/prompt.zsh
 # Zoxide init
 eval "$(zoxide init --cmd cd zsh)"
 
+
