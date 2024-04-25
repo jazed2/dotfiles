@@ -1,0 +1,15 @@
+import = [
+   "/home/jazze/.config/alacritty/themes/themes/dracula_plus.toml"
+]
+
+[window]
+decorations = "None"
+dimensions = { columns = 100 , lines = 25 }
+padding = { x = 3, y = 3 }
+dynamic_padding = true
+
+[font]
+normal = { family = "JetBrainsMonoNF", style = "Regular" }
+bold = { family = "JetBrainsMonoNF", style = "Bold" }
+italic = { family = "JetBrainsMonoNF", style = "Italic" }
+size = 8

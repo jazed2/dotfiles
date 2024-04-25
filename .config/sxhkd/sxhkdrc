@@ -1,0 +1,19 @@
+# Flameshot
+shift + Print
+	flameshot gui
+
+Print
+	flameshot full -c
+
+ctrl + Print
+	flameshot launcher
+
+# suckless specifics
+super + p
+	dmenu_run
+
+shift + super + equal
+	= --dmenu=dmenu
+
+
+
