@@ -1,8 +1,5 @@
-# Exports tests
-exec  /home/jazze/.config/zsh/exports.zsh &
-
+# Notifications
 dunst &
-#exec NetworkManager -n > /dev/null 2>&1 &
 
 # SXHKD for all shortcuts
 exec /usr/bin/sxhkd &
@@ -16,5 +13,3 @@ exec /usr/bin/flameshot &
 # DWM stuff
 dwmblocks &
 exec dwm
-
-
