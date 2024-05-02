@@ -1,0 +1,32 @@
+#!/bin/sh
+
+case $BUTTON in
+	1) connman-gtk --no-icon; pkill -RTMIN+4 dwmblocks ;;
+	2) notify-send "🌐 Internet module" "\- Click to connect
+󰖪 : wifi disabled
+󱚵 : no wifi connection
+ : wifi connection with quality
+󰈁 : ethernet working
+󰈂 : ethernet disabled
+ : vpn is active
+" ;;
+	3) notify-send "Connected to: $(connmanctl services | awk '$1=="*AO" {for (i=2;i<NF;i++) print $i}' 'ORS= ')
+
+Press left mouse button to open connection menu.
+		";;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+if [ "$(cat /sys/class/net/wlan0/operstate)" = 'up' ] ; then
+	wifiicon="$(awk '/^\s*w/ { print "󰖩", int($3 * 100/70) "% " }' /proc/net/wireless)"
+elif [ "$(cat /sys/class/net/wlan0/operstate)" = 'down' ] ; then
+	[ "$(cat /sys/class/net/wlan0/flags)" = '0x1003' ] && wifiicon="󱚵 " || wifiicon="󰖪 "
+fi
+
+# Ethernet
+[ "$(cat /sys/class/net/eth0/operstate 2>/dev/null)" = 'up' ] ethericon="󰈁" || ethericon="󰈂"
+
+# VPN
+[ -n "$(cat /sys/class/net/tun*/operstate 2>/dev/null)" ] && tunicon=" "
+
+printf "%s%s%s\n" "$wifiicon" "$ethericon" "$tunicon"

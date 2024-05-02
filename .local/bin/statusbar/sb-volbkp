@@ -1,0 +1,31 @@
+#!/bin/sh
+
+case $BUTTON in
+	1) setsid -w -f "$TERMINAL" -e pulsemixer; pkill -RTMIN+10 "${STATUSBAR:-dwmblocks}" ;;
+	2) pactl set-sink-mute @DEFAULT_SINK@ toggle ;;
+	3) pactl set-source-mute @DEFAULT_SOURCE@ toggle ;;
+	4) pactl set-sink-volume @DEFAULT_SINK@ +5% ;;
+	5) pactl set-sink-volume @DEFAULT_SINK@ -5% ;;
+	6) setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+if [ "$(pactl get-sink-mute @DEFAULT_SINK@)" = 'Mute: yes' ]; then
+    volicon='󰝟 MUTED'
+else
+    vol=$(pactl get-sink-volume @DEFAULT_SINK@ | grep -o '[0-9]\+%' | head -n1 | sed 's/%//')
+    case 1 in
+	$((vol >= 80)) ) volicon='󰕾 '$vol'%' ;;
+	$((vol >= 50)) ) volicon='󰖀 '$vol'%' ;;
+	$((vol >= 10)) ) volicon='󰕿 '$vol'%' ;;
+	$((vol < 10))  ) volicon='󰝞 '$vol'%' ;;
+    esac
+fi
+
+# Mic mute indicator
+if pactl get-source-mute @DEFAULT_SOURCE@ | grep -q "^Mute: no"; then
+    micicon=""
+else
+    micicon="  "
+fi 
+
+printf "%s%s" "$volicon" "$micicon"

@@ -1,0 +1,42 @@
+#!/bin/sh
+
+togglemax () {
+    if [[ $(xbacklight -get) -gt 50 ]] then
+	xbacklight -set 20
+    else 
+	xbacklight -set 90
+    fi
+
+    notify-send "Brightness set to $(xbacklight -get)%"
+}
+
+stepinc () {
+    if [[ $(xbacklight -get) -le 99 ]] then
+	xbacklight -inc 30
+    else 
+	xbacklight -set 10
+    fi
+
+    notify-send "Brightness set to $(xbacklight -get)%"
+}
+
+case $BUTTON in
+    1) stepinc ;;
+    2) togglemax ;;
+    4) xbacklight -inc 10 ;;
+    5) xbacklight -dec 10 ;;
+    3) notify-send "💡 Brightness Control" "\- Shows brightness.
+- Left click to increase brightness in steps.
+- Middle click to toggle brightness MAX/MIN.
+- Scroll to change." ;;
+    6) setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+bright=$(xbacklight -get)
+case 1 in
+    $((bright >= 80)) ) echo '󰃠 '$bright'%';;
+    $((bright >= 50)) ) echo '󰃝 '$bright'%';;
+    $((bright >= 30)) ) echo '󰃟 '$bright'%';;
+    $((bright >= 10)) ) echo '󰃞 '$bright'%';;
+    $((bright < 10)) ) xbacklight -set 10 && echo '󰃞'$bright'%' ;;
+esac

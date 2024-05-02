@@ -1,0 +1,50 @@
+#!/bin/sh
+# Display the current battery status.
+
+notify() {
+    notify-send \
+        --icon=battery-good-symbolic \
+        --expire-time=4000 \
+        --hint=string:x-canonical-private-synchronous:battery \
+        "Battery" "$1"
+}
+
+case "$BUTTON" in
+    1) notify "$(acpi -b | awk -F ': |, ' '{printf "%s\n%s\n", $2, $4}')";;
+    6) terminal -e "$EDITOR" "$0" ;;
+esac
+
+# Loop through all attached batteries.
+for battery in /sys/class/power_supply/BAT?*; do
+    # If non-first battery, print a space separator.
+    [ -n "${capacity+x}" ] && printf " "
+
+    capacity="$(cat "$battery/capacity" 2>&1)"
+    if [ "$capacity" -gt 90 ]; then
+        baticon=" "
+    elif [ "$capacity" -gt 60 ]; then
+        baticon=" "
+    elif [ "$capacity" -gt 40 ]; then
+        baticon=" "
+    elif [ "$capacity" -gt 10 ]; then
+        baticon=" "
+    else
+        baticon=" "
+    fi
+
+    case "$(cat "$battery/status" 2>&1)" in
+        Full) baticon=" " ;;
+        Discharging)
+            if [ "$capacity" -le 20 ]; then
+                baticon="$baticon"
+                color=1
+            fi
+            ;;
+        Charging) baticon="󰚥$baticon" ;;
+        "Not charging") baticon=" " ;;
+        Unknown) baticon="? $baticon" ;;
+        *) exit 1 ;;
+    esac
+
+    echo $baticon$capacity"%"
+done
