@@ -12,9 +12,6 @@ function preexec() {
 
 function precmd() {
   vcs_info 
-  setopt PROMPT_SUBST
-  print -P "
-   %B%F{blue}%~%f%b %B%F{magenta}${vcs_info_msg_0_}%f%b "
 
   if [ $timer ]; then
     local now=$(date +%s%3N)
@@ -31,15 +28,19 @@ function precmd() {
     else elapsed=${ms}ms
     fi
 
-    export RPROMPT="%F{cyan}took %B%F{yellow}${elapsed} %{$reset_color%}"
+    TIME="%F{cyan}took %B%F{yellow}${elapsed} %{$reset_color%}"
     unset timer
   fi
+
+  setopt PROMPT_SUBST
+  print -P "
+ %B%F{blue}%~%f%b %B%F{magenta}${vcs_info_msg_0_}%f%b "
 }
 
 function zle-line-init zle-keymap-select {
 case ${KEYMAP} in 
-  (vicmd)          PROMPT=" %B%K{45}%F{black}N%f%k%b $ " ;;
-  (main|viins)     PROMPT=" %B%K{47}%F{black}I%f%k%b $ " ;;
+  (vicmd)          PROMPT=" $TIME%B%F{green}%f%b " ;;
+  (main|viins)     PROMPT=" $TIME%B%F{green}%f%b " ;;
 esac
 
 
