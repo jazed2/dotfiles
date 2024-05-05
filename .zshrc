@@ -43,7 +43,5 @@ source $HOME/.config/zsh/prompt.zsh
 # Starship prompt
 #eval "$(starship init zsh)"
 
-# Zoxide init
+# Replace linux cd with  (z)oxide 
 eval "$(zoxide init --cmd cd zsh)"
-
-
