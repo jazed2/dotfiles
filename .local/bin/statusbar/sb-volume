@@ -18,16 +18,16 @@ do
     case $muteState in
 	"no") 
 	    if [ $vol -ge 80 ]; then
-		volicon='󰕾 '$vol'%'
+		volicon=' 󰕾 '$vol'%'
 	    elif [ $vol -ge 50 ]; then
-		volicon='󰖀 '$vol'%'
+		volicon=' 󰖀 '$vol'%'
 	    elif [ $vol -ge 10 ]; then
-		volicon='󰕿 '$vol'%'
+		volicon=' 󰕿 '$vol'%'
 	    else
-		volicon='󰝞 '$vol'%'
+		volicon=' 󰝞 '$vol'%'
 	    fi
 	    ;;
-	"yes")  volicon='󰝟 MUTED' ;;
+	"yes")  volicon=' 󰝟 MUTED' ;;
     esac
 
 # Set Mic icon based on mute state
