@@ -40,8 +40,5 @@ source $HOME/.config/zsh/garudaExtras.zsh
 # Prompt
 source $HOME/.config/zsh/prompt.zsh
 
-# Starship prompt
-#eval "$(starship init zsh)"
-
 # Replace linux cd with  (z)oxide 
 eval "$(zoxide init --cmd cd zsh)"
