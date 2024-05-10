@@ -15,5 +15,8 @@ super + p
 shift + super + equal
 	= --dmenu=dmenu
 
+# some apps
+super + e
+	pcmanfm
 
 
