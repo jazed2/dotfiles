@@ -10,7 +10,7 @@ exec /usr/bin/flameshot &
 ~/.fehbg &
 
 # Runit services
-runsvdir $HOME/.config/runit/runsvdir
+runsvdir $HOME/.config/runit/runsvdir &
 
 # DWM stuff
 dwmblocks &
