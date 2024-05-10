@@ -1,8 +1,9 @@
 # Notifications
 dunst &
 
-# SXHKD for all shortcuts
+# Hotkeys and layout
 exec /usr/bin/sxhkd &
+xmodmap $HOME/.config/.Xmodmap &
 
 # Apps
 exec signal-desktop --disable-font-subpixel-positioning --start-in-tray --no-sandbox %U  &
