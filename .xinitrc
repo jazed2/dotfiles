@@ -5,7 +5,7 @@ dunst &
 exec /usr/bin/sxhkd &
 
 # Apps
-exec signal-desktop --start-in-tray --no-sandbox %U  &
+exec signal-desktop --disable-font-subpixel-positioning --start-in-tray --no-sandbox %U  &
 exec /usr/bin/flameshot &
 ~/.fehbg &
 
