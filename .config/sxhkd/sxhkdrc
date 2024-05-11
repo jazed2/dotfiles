@@ -10,7 +10,7 @@ ctrl + Print
 
 # suckless specifics
 super + p
-	dmenu_run_desktop
+	dmenu_run
 
 shift + super + equal
 	= --dmenu=dmenu
