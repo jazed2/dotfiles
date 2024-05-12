@@ -15,7 +15,6 @@ case $BUTTON in
             --format-event "• <span foreground='$(xrdb -get color6)'>%m</span>\n")"
         [ -n "$appointments" ] && notify "Appointments" "$appointments"
         ;;
-    3) setsid --fork $TERMINAL -e calcurse ;;
     6) terminal -e "$EDITOR" "$0" ;;
 esac
 
