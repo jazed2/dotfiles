@@ -19,4 +19,4 @@ case $BUTTON in
 esac
 
 . sb-theme
-display " $(date '+%H:%M:%S [%a,%d]') "
+display " $(date '+%H:%M:%S [%a,%d]')"
