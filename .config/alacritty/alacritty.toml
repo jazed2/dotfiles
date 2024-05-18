@@ -1,7 +1,7 @@
-import = [
-   "/home/jazze/.config/alacritty/themes/themes/dracula_plus.toml"
-]
-
+#import = [
+#   "/home/jazze/.config/alacritty/themes/themes/breeze.toml"
+#]
+#
 [window]
 decorations = "None"
 dimensions = { columns = 100 , lines = 25 }
@@ -13,3 +13,7 @@ normal = { family = "JetBrainsMonoNF", style = "Regular" }
 bold = { family = "JetBrainsMonoNF", style = "Bold" }
 italic = { family = "JetBrainsMonoNF", style = "Italic" }
 size = 8
+
+[shell]
+program = "tmux"
+#args = ["-l"]
