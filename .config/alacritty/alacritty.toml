@@ -1,5 +1,5 @@
 import = [
-   "/home/jazze/.config/alacritty/themes/themes/enfocado_dark.toml"
+  "~/.config/alacritty/themes/themes/orangish.toml"
 ]
 
 [window]
@@ -16,4 +16,3 @@ size = 8
 
 [shell]
 program = "tmux"
-#args = ["-l"]
