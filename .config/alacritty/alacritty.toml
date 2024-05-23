@@ -1,7 +1,7 @@
-#import = [
-#   "/home/jazze/.config/alacritty/themes/themes/breeze.toml"
-#]
-#
+import = [
+   "/home/jazze/.config/alacritty/themes/themes/enfocado_dark.toml"
+]
+
 [window]
 decorations = "None"
 dimensions = { columns = 100 , lines = 25 }
