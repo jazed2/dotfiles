@@ -185,8 +185,6 @@ cmd on-cd &{{
     lf -remote "send $id set promptfmt \"$fmt\""
 }}
 
-# Image preview using ctpv (Very low res previews)
-set previewer ctpv
-set cleaner ctpvclear
-&ctpv -s $id
-&ctpvquit $id
+# Use Ueberzurgpp for file preview
+set previewer ~/.config/lf/preview
+set cleaner ~/.config/lf/cleaner
