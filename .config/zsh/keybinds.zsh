@@ -12,8 +12,10 @@ _zlf() {
         rm -rf $d
     }
 }
-zle -N _zlf
-bindkey -s '^o' _zlf
+zle -N _zlf 
+# bindkey in both vi insert mode and vi command mode
+bindkey -M viins '^O' _zlf 
+bindkey -M vicmd '^O' _zlf
 
 _zlf_handler() {
     emulate -L zsh
