@@ -41,7 +41,7 @@ bindkey '^k' history-search-backward
 #
 
 # Keymapping
-source $HOME/.config/zsh/func.zsh
+source $HOME/.config/zsh/keybinds.zsh
 
 # ZSH Plugins (Added as submoudles for easier updating)
 source $HOME/.config/zsh/plugins/fzf-tab/fzf-tab.zsh

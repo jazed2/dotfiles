@@ -17,7 +17,7 @@ shift + super + equal
 
 # some apps
 super + e
-	pcmanfm
+	alacritty --title=LF --command=lf
 
 super + Return
 	alacritty
