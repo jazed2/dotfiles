@@ -56,9 +56,6 @@ source $HOME/.config/zsh/aliases.zsh
 # Zoxide init
 source $HOME/.config/zsh/zoxide.zsh
 
-# Garuda Linux Extra
-source $HOME/.config/zsh/garudaExtras.zsh
-
 # Prompt
 source $HOME/.config/zsh/prompt.zsh
 
