@@ -51,10 +51,10 @@ alias zshrc="nvim ~/.config/zsh/"
 
 alias poweroff='sudo shutdown -h now' # -h flags halts system, different from normal arch behavior. Required in artix because impatience
 
-alias ls='eza -al --color=always --group-directories-first --icons' # preferred listing
-alias la='eza -a --color=always --group-directories-first --icons'  # all files and dirs
-alias ll='eza -l --color=always --group-directories-first --icons'  # long format
-alias lt='eza -aT --color=always --group-directories-first --icons' # tree listing
+alias ls='eza -al --color=always --group-directories-first --icons $1' # preferred listing
+alias la='eza -a --color=always --group-directories-first --icons $1'  # all files and dirs
+alias ll='eza -l --color=always --group-directories-first --icons $1'  # long format
+alias lt='eza -aT --color=always --group-directories-first --icons $1' # tree listing
 alias l.='eza -ald --color=always --group-directories-first --icons .*' # show only dotfiles
 
 alias feh="/usr/local/bin/devour feh -g 640x480 -d -S filename $1"
