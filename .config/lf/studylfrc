@@ -1,0 +1,451 @@
+# vim: foldmethod=marker foldlevel=0 filetype=lfrc
+# General settings {{{
+# interpreter for shell commands (needs to be POSIX compatible)
+set shell bash
+
+# set '-eu' options for shell commands
+# These options are used to have safer shell commands. Option '-e' is used to
+# exit on error and option '-u' is used to give error for unset variables.
+# Option '-f' disables pathname expansion which can be useful when $f, $fs, and
+# $fx variables contain names with '*' or '?' characters. However, this option
+# is used selectively within individual commands as it can be limiting at
+# times.
+set shellopts '-eu'
+
+# set internal field separator (IFS) to "\n" for shell commands
+# This is useful to automatically split file names in $fs and $fx properly
+# since default file separator used in these variables (i.e. 'filesep' option)
+# is newline. You need to consider the values of these options and create your
+# commands accordingly.
+set ifs "\n"
+
+# leave some space at the top and the bottom of the screen
+set scrolloff 10
+
+# Set a previewer
+set previewer ~/.config/lf/preview
+set preview
+
+# General options
+set ignorecase
+set icons
+set number
+set relativenumber
+
+# Show number of files in dirs instead of single size
+set info size
+set dircounts
+# }}}
+# Command definitions {{{
+# the prefix shows what kind of command it is
+#   $: runs as shell command
+#   %: runs as piped shell command (stdout => statusline)
+#   !: runs as interactive shell command (puts lf in the bg)
+#   :: runs as lf command
+#
+# commands run in the shell defined above, you can use $f, $fs, $fx vars.
+# you can also send remote commands.
+
+# define a custom 'open' command
+cmd open $opener $fx
+
+# define a custom 'rename' command without prompt for overwrite
+cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
+
+# rename multiple files the way nnn does it (open in editable buffer)
+cmd batch_rename !{{
+  contentsfile=$(mktemp)
+  trap 'rm $contentsfile' INT TERM EXIT
+  dircontents="$(command ls -1p)"
+  printf "%s" "$dircontents" | nl -n ln > "$contentsfile";
+  $EDITOR "$contentsfile"
+  printf "%s" "$dircontents" | paste -d '\t' "$contentsfile" - \
+  | while read -r line; do
+    orig="$(printf "%s" "$line" | cut -f3 | sed 's!/$!!')"
+    new="$(printf "%s" "$line" | cut -f2 | sed 's!/$!!')"
+    if [ "$new" != "$orig" ]; then
+      if [ -e "$new" ]; then
+        printf "%s already exists, not overwriting.\n" "$new"
+      else
+        printf "./%s -> ./%s\n" "$orig" "$new"
+        command mv -i ./"$orig" ./"$new"
+      fi
+    fi
+  done
+  rm "$contentsfile"
+  trap - INT TERM EXIT
+}}
+
+# change part of a filename using sed
+cmd change %{{
+  printf "Substitute: "
+  read -r sedcmd
+  mv "$f" "$(dirname "$f")/$(printf '%s' "$(basename "$f")" | sed "s$sedcmd")"
+}}
+
+# load audio files/playlists in mpd
+cmd queue %{{
+  for i in $fx; do
+    mpcq "$i"
+  done
+}}
+cmd queuenext %{{
+  for i in $fx; do
+    case "$i" in
+      *.wav|*.flac|*.mp3|*.m4a|*.opus)
+        mpc -h ~/.local/share/mpd/socket insert "file://$i"
+        printf "Queued: %s" "$i"
+        ;;
+      *.m3u)
+        mpc -h ~/.local/share/mpd/socket load "file://$i"
+        printf "Loaded playlist: %s" "$i"
+        ;;
+    esac
+  done
+}}
+
+# extract the current file with the right command
+# (xkcd link: https://xkcd.com/1168/)
+cmd extract ${{
+    set -f
+    case $f in
+        *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) tar xjvf $f;;
+        *.tar.gz|*.tgz) tar xzvf $f;;
+        *.tar.xz|*.txz) tar xJvf $f;;
+        *.zip) unzip $f;;
+        *.rar) unrar x $f;;
+        *.7z) 7z x $f;;
+        *.jar) jar -xvf $f;;
+    esac
+}}
+
+# copy the path of the highlighted file
+# relies on my `clc` script
+cmd copy_path ${{
+  echo "$f" | tr -d '\n' | clc
+}}
+
+# zip directories/files
+cmd zip ${{
+  set -f
+  mkdir $f-zip
+  cp -r $fx $f-zip
+  (cd $f-zip/ && zip -r $f.zip .)
+  rm -rf $f-zip/
+}}
+
+# tar directories/files
+cmd tar ${{
+  set -f
+  mkdir $f-tgz
+  cp -r $fx $f-tgz
+  (cd $f-tgz && tar cvzf $f.tar.gz .)
+  rm -rf $f-tgz
+}}
+
+# custom paste command using rsync/mv
+cmd paste &{{
+    load=$(cat ~/.local/share/lf/files)
+    mode=$(echo "$load" | sed -n '1p')
+    list=$(echo "$load" | sed '1d')
+    if [ $mode = 'copy' ]; then
+        rsync -av --ignore-existing --progress $list . \
+        | stdbuf -i0 -o0 -e0 tr '\r' '\n' \
+        | while read line; do
+            lf -remote "send $id echo $line"
+        done
+    elif [ $mode = 'move' ]; then
+        mv -n $list .
+    fi
+    lf -remote 'send load'
+    lf -remote 'send clear'
+}}
+
+# paste as a symbolic link to original
+cmd paste_link %{{
+  if [ "$(wc -l < ~/.local/share/lf/files)" -gt 1 ]; then
+    while read -r file; do
+      case "$file" in
+        copy|move) ;;
+        *)
+          ln -s "$file" .
+          ;;
+      esac
+    done < ~/.local/share/lf/files
+  else
+    lf -remote "send $id echo no files to link."
+  fi
+}}
+
+cmd paste_rename %{{
+  mode="$(head -n 1 ~/.local/share/lf/files)"
+  for fname in $(tail -n +2 ~/.local/share/lf/files); do
+    while [ -z "${newfname:-}" ]; do
+      printf "%s => " "$fname"
+      read -r newfname
+    done
+    if [ "$mode" = 'copy' ]; then
+      cp -n "$fname" ./"$newfname"
+    else
+      mv -n "$fname" ./"$newfname"
+    fi
+  done
+  lf -remote 'send clear'
+  lf -remote 'send load'
+}}
+
+# preview the highlighted file with quicklook (macOS)
+cmd ql_preview &{{
+  qlmanage -p $fx &> /dev/null;
+}}
+
+# open the lfrc, and reload it after saving
+cmd edit_config :{{
+  $$EDITOR ~/.config/lf/lfrc
+  source ~/.config/lf/lfrc
+}}
+
+cmd z ${{
+  set +u
+  if [ $# -gt 0 ]; then
+    dest=''
+    if command -v zoxide >/dev/null 2>&1; then
+        dest="$(zoxide query "$@")"
+    fi
+
+    if test -n "${dest}"; then
+        lf -remote "send $id cd '${dest}'"
+    fi
+  fi
+}}
+
+# trash command with confirmation
+cmd trash %{{
+  for f in $fx; do
+    printf "Trash $f? [Y/n/a] "
+    read -r ans
+    case "$ans" in
+      Y*|y*) trash "$f"; printf 'Deleted %s.\n' "$f";;
+      A*|a*) trash $fx; printf 'Deleted all files.\n'; break;;
+    esac
+  done
+}}
+
+# empty the trash
+cmd trashempty %{{
+  printf "Empty trash? [Y/n] "
+  read -r ans
+  case "$ans" in
+    Y*|y*) trash -ey; printf "Emptied.";;
+    *) printf "Not emptying.";;
+  esac
+}}
+
+# PGP functions
+cmd pgp_encrypt_recipient %{{
+  printf "Recipient: "
+  read -r recipient
+  case "$recipient" in
+    "") printf "Cancelled.";;
+    *) gpg --encrypt --sign --recipient "$recipient" $f;;
+  esac
+}}
+
+cmd pgp_encrypt_pass ${{
+  gpg --symmetric $f;
+}}
+
+cmd pgp_decrypt ${{
+  case "$f" in
+    *.gpg) outfile="${f%.gpg}";;
+    *.pgp) outfile="${f%.pgp}";;
+    *) outfile="decrypted-${f}";;
+  esac
+  gpg --output "$outfile" --decrypt "$f"
+}}
+
+# Encode input into binary or ASCII-armored output with an integrated signature
+cmd pgp_sign ${{
+  gpg --sign $f
+}}
+
+# Wrap input in plaintext signature
+cmd pgp_sign_clear ${{
+  gpg --clearsign $f
+}}
+
+# Create binary or ASCII-armored detached signature from input
+cmd pgp_sign_detach ${{
+  gpg --detach-sign $f
+}}
+
+# Select files based on glob filter
+cmd glob-select-wrapper %{{
+  printf "Filter: "
+  read -r filter_expr
+  lf -remote "send $id unselect"
+  lf -remote "send $id glob-select $filter_expr"
+}}
+
+# Remove empty directories in current tree
+cmd rmempty %find .  -type d -empty -depth -delete
+
+# Use xld to transcode audio
+cmd xld %open -a XLD $f
+
+# fzf files
+cmd fuzzy_select $lf -remote "send $id select \"$(fzf --layout reverse)\""
+
+# fuzzy grep files
+cmd fuzzy_grep ${{
+  fpath="$(rg --color=always --line-number --no-heading --smart-case "${*:-}" \
+    | fzf --ansi --delimiter : --preview 'bat --color=always {1} --highlight-line {2}' --preview-window 'up,60%,border-bottom,+{2}+3/3,~3' --bind 'enter:become(printf "%s" {1})')"
+  lf -remote "send $id select $fpath"
+}}
+
+# Show file info with exiftool
+cmd file_info $LESSOPEN='| exiftool %s' LESS='-cRiX' less $f
+
+# Preview a file
+cmd file_preview $LESSOPEN='| ~/.config/lf/preview %s' LESS='-cRiX' less $f
+
+# Scroll parent up/down
+cmd scroll_parent_up :{{
+  updir; up
+  %[ -d "$f" ] && lf -remote "send $id open"
+}}
+
+cmd scroll_parent_down :{{
+  updir; down
+  %[ -d "$f" ] && lf -remote "send $id open"
+}}
+
+cmd qrsend ${{
+  clear
+  qrcp send $fx || { clear; qrcp send --interface en0 $fx; }
+}}
+# }}}
+# Mappings {{{
+# Mouse
+map <m-down> down
+map <m-up> up
+map <m-1> open
+map <m-3> updir
+
+# Enter commands
+map ; push :
+map S shell-pipe
+
+# execute current file (must be executable)
+map x $$f
+map X !$f
+
+# Disk usage
+map ug %du -sh $f
+
+# Open (uses the above-defined command)
+map o open $fx
+map <enter> open $fx
+# Open containing dir
+map O $open $(dirname $f)
+
+# Listing
+map r reload
+map . set hidden!
+map U redraw
+
+# Selecting
+map f fuzzy_select
+map \\ fuzzy_grep
+map <esc> unselect; clear
+map <space> :toggle; down
+map F glob-select-wrapper
+map u
+map uu unselect
+map uy clear
+map ud clear
+map a :unselect; invert
+
+# Show help
+map g? $lf -doc | $PAGER; clear
+
+# Renaming
+map R push :rename<space>
+map <c-r> batch_rename
+map C change
+map cw push :rename<space>
+
+# <tab> == <c-i>
+map <tab> jump-next
+map <c-o> jump-prev
+# Delete
+map D trash
+
+# Copy (others are defined by default)
+map Y copy_path
+
+# Paste
+map p
+map pp paste
+map pl paste_link
+map pr paste_rename
+
+# Viewing
+map i file_info
+map P file_preview
+map v ql_preview
+map <c-v> :set preview!; reload
+
+# Navigation
+map z push :z
+map [ scroll_parent_up
+map ] scroll_parent_down
+map gd. cd ~/Documents
+map gds cd ~/Documents/School
+map gdw cd ~/Documents/Programming/alex.balgavy.eu/
+map gdb cd ~/Documents/Programming/blog.alex.balgavy.eu/
+map gdl cd ~/Documents/Programming/lectures.alex.balgavy.eu/
+map gb cd ~/Documents/Calibre\ Library/
+map gdp cd ~/Documents/Syncthing/Personal\ documents/
+map gD cd ~/Desktop
+map gl cd ~/Downloads
+map gw cd ~/Documents/Syncthing/vimwiki
+map gm cd ~/Music/Libraries/Mine
+map g/ cd /
+map g. cd $DOTFILES
+map gv cd /Volumes
+map gt cd ~/.Trash/
+
+# Creating
+map c
+map cf push %touch<space>
+map cd push %mkdir<space>
+
+# Editing
+map e
+map E $$EDITOR $fx
+map ee $$EDITOR $f
+map ec edit_config
+map ce edit_config
+
+map Q queue
+
+# Compressing
+map t
+map * tag-toggle
+map tz zip
+map tt tar
+map tu extract
+
+map td &ripdrag $fx
+
+# PGP
+map tp
+map tpe pgp_encrypt_recipient
+map tpp pgp_encrypt_pass
+map tpd pgp_decrypt
+map tps. pgp_sign
+map tpsc pgp_sign_clear
+map tpsd pgp_sign_detach
+
+map tq qrsend
