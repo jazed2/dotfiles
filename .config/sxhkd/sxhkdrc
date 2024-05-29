@@ -9,7 +9,7 @@ ctrl + Print
 	flameshot launcher
 
 # suckless specifics
-super + p
+super + space
 	dmenu_run
 
 shift + super + equal
@@ -17,7 +17,10 @@ shift + super + equal
 
 # some apps
 super + e
-	alacritty --title=LF --command=lf
+	alacritty --config-file=/home/jazze/.config/alacritty/alacritty-norm.toml --title=LF --command=$HOME/.config/lf/lfub
 
 super + Return
 	alacritty
+
+shift + super + Return
+	floatTerm
