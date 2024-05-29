@@ -8,7 +8,8 @@ dimensions = { columns = 100 , lines = 25 }
 position = { x = 450 , y = 250 }
 padding = { x = 3, y = 10 }
 class = { instance = "floating" , general = "Alacritty" }
-dynamic_padding = false
+dynamic_padding = true
+opacity = 0.8
 
 [font]
 normal = { family = "JetBrainsMonoNF", style = "Regular" }
