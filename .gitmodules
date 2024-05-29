@@ -1,9 +1,6 @@
 [submodule ".config/suckless"]
 	path = .config/suckless
 	url = git@github.com:jazed2/suckless.git
-[submodule ".config/nvim"]
-	path = .config/nvim
-	url = git@github.com:jazed2/nvim.git
 [submodule ".config/zsh/plugins/fzf-tab"]
 	path = .config/zsh/plugins/fzf-tab
 	url = https://github.com/Aloxaf/fzf-tab.git
