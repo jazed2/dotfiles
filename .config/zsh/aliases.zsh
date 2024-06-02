@@ -57,8 +57,6 @@ alias ll='eza -l --color=always --group-directories-first --icons $1'  # long fo
 alias lt='eza -aT --color=always --group-directories-first --icons $1' # tree listing
 alias l.='eza -ald --color=always --group-directories-first --icons .*' # show only dotfiles
 
-alias feh="/usr/local/bin/devour feh -g 640x480 -d -S filename $1"
-
 alias lf='$HOME/.config/lf/lfub' # Wrapper script for previews using jstkdng/ueberzugpp
 
 alias ..='cd ..'

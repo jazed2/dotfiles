@@ -9,6 +9,7 @@ exec xmodmap $HOME/.config/.Xmodmap &
 exec signal-desktop --disable-font-subpixel-positioning --start-in-tray --no-sandbox %U  &
 exec /usr/bin/flameshot &
 exec keepassxc &
+exec xdman-beta &
 ~/.fehbg &
 
 # Runit services

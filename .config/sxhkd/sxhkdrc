@@ -22,5 +22,5 @@ super + e
 super + Return
 	alacritty
 
-shift + super + Return
+shift + super + a
 	floatTerm
