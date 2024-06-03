@@ -31,9 +31,8 @@ _zlf_handler() {
 zle -N _zlf_handler
 
 # Lazy git functions because why not?
-lazyg () {
-    git add .
-    git commit -m $1
-    git push
+gam () {
+    git add $1
+    git commit -m $2
 }
 
