@@ -12,7 +12,7 @@ dynamic_padding = true
 normal = { family = "JetBrainsMonoNF", style = "Regular" }
 bold = { family = "JetBrainsMonoNF", style = "Bold" }
 italic = { family = "JetBrainsMonoNF", style = "Italic" }
-size = 8
+size = 8.5
 
 [shell]
 program = "tmux"
