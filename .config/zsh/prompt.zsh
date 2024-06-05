@@ -42,11 +42,8 @@ case ${KEYMAP} in
   (vicmd)          PROMPT=" $TIME%B%F{green}%f%b " ;;
   (main|viins)     PROMPT=" $TIME%B%F{green}%f%b " ;;
 esac
-
-
 zle reset-prompt
 }
 
 zle -N zle-line-init
 zle -N zle-keymap-select
-

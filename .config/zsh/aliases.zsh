@@ -44,8 +44,8 @@ alias grep='rg --color=auto' # New fast grep
 alias fgrep='rg -F --color=auto' # String operation
 alias egrep='rg -E --color=auto' # Encoding
 
-alias e="nvim $1"
-alias vim="nvim $1"
+alias n="nvim $1"
+alias nsp="nvim -o $1 $2"
 alias vimrc="nvim ~/.config/nvim/"
 alias zshrc="nvim ~/.config/zsh/" 
 
