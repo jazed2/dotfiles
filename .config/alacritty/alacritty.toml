@@ -15,4 +15,5 @@ italic = { family = "JetBrainsMonoNF", style = "Italic" }
 size = 8.5
 
 [shell]
-program = "tmux"
+program = "/usr/bin/zsh"
+args = ["-c", "tmux -u attach || tmux -u new -s init"]
