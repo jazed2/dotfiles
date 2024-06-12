@@ -5,12 +5,8 @@ dunst &
 exec /usr/bin/sxhkd &
 exec xmodmap $HOME/.config/.Xmodmap &
 
-# Apps
-exec signal-desktop --disable-font-subpixel-positioning --start-in-tray --no-sandbox %U  &
-exec /usr/bin/flameshot &
-exec keepassxc &
-exec xdman-beta &
-~/.fehbg &
+# Launch apps on startup 
+exec $HOME/.local/bin/applauncher &
 
 # Runit services
 runsvdir $HOME/.config/runit/runsvdir &
