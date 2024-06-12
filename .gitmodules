@@ -13,3 +13,6 @@
 [submodule ".config/nvim"]
 	path = .config/nvim
 	url = git@github.com:jazed2/nvim.git
+[submodule ".config/zsh/plugins/git-prompt.zsh"]
+	path = .config/zsh/plugins/git-prompt.zsh
+	url = https://github.com/woefe/git-prompt.zsh

@@ -52,7 +52,7 @@ source $HOME/.config/zsh/pluginsconfig.zsh
 
 # Aliases
 source $HOME/.config/zsh/aliases.zsh
-	
+
 # Zoxide init
 source $HOME/.config/zsh/zoxide.zsh
 
