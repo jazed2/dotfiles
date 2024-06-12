@@ -1,8 +1,8 @@
 autoload -Uz add-zsh-hook vcs_info
 zstyle ':vcs_info:*' enable git svn
 zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' unstagedstr ' [U]'
-zstyle ':vcs_info:*' stagedstr ' [S]'
+zstyle ':vcs_info:*' unstagedstr '[U]'
+zstyle ':vcs_info:*' stagedstr '[S]'
 zstyle ':vcs_info:git*' formats "%s (%b) %m%a%u%c "
 zstyle ':vcs_info:git*' actionformats "%s (%b) %m%a%u%c "
 
