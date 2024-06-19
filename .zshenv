@@ -6,7 +6,8 @@ export \
   PATH=$HOME/.local/bin:$HOME/.local/bin/statusbar:$PATH \
   LC_ALL=en_IN.UTF-8 \
   LANG=en_IN.UTF-8 \
-  MANPAGER='nvim +Man!'
+  MANPAGER='nvim --clean +Man!'
+  PAGER='nvim --clean +Man!'
 
 if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
   startx
