@@ -7,6 +7,7 @@ decorations = "None"
 dimensions = { columns = 100 , lines = 25 }
 padding = { x = 3, y = 3 }
 dynamic_padding = true
+opacity = 0.85
 
 [font]
 normal = { family = "JetBrainsMonoNF", style = "Regular" }

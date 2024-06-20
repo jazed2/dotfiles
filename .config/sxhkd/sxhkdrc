@@ -22,5 +22,9 @@ super + e
 super + Return
 	alacritty
 
-shift + super + a
+super + a
 	floatTerm
+
+ctrl + o
+	exec $HOME/.config/lf/lfub
+

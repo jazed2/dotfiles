@@ -9,7 +9,7 @@ position = { x = 450 , y = 250 }
 padding = { x = 3, y = 10 }
 class = { instance = "floating" , general = "Alacritty" }
 dynamic_padding = true
-opacity = 0.8
+opacity = 0.85
 
 [font]
 normal = { family = "JetBrainsMonoNF", style = "Regular" }
