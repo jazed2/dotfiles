@@ -3,12 +3,15 @@ export \
   EDITOR=nvim \
   VISUAL=nvim \
   TERMINAL=alacritty \
-  PATH=$HOME/.local/bin:$HOME/.local/bin/statusbar:$PATH \
+  PATH=$HOME/bin:$HOME/.local/bin:$HOME/.local/bin/statusbar:$PATH \
   LC_ALL=en_IN.UTF-8 \
   LANG=en_IN.UTF-8 \
-  MANPAGER='nvim --clean +Man!'
-  PAGER='nvim --clean +Man!'
+  AUTOCD=1 \
+  TZ=Asia/Kolkata
 
-if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
-  startx
-fi
+# Using batman as manpager
+# eval "$(batman --export-env)"
+#
+# if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
+#   startx
+# fi
