@@ -9,11 +9,13 @@ position = { x = 450 , y = 250 }
 padding = { x = 3, y = 10 }
 class = { instance = "floating" , general = "Alacritty" }
 dynamic_padding = true
-opacity = 0.85
+opacity = 0.70
 
 [font]
 normal = { family = "JetBrainsMonoNF", style = "Regular" }
 bold = { family = "JetBrainsMonoNF", style = "Bold" }
 italic = { family = "JetBrainsMonoNF", style = "Italic" }
-size = 8
+size = 11.5
 
+[shell]
+program = "/usr/bin/zsh"
