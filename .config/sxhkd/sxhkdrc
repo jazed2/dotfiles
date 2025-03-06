@@ -23,8 +23,13 @@ super + Return
 	alacritty
 
 super + a
-	floatTerm
+	alacritty --config-file=$HOME/.config/alacritty/alacritty-norm.toml
 
 ctrl + o
 	exec $HOME/.config/lf/lfub
 
+ctrl + up
+    pactl set-sink-volume @DEFAULT_SINK@ +5%
+
+ctrl + down
+	pactl set-sink-volume @DEFAULT_SINK@ -5%
