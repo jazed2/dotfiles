@@ -1,0 +1,30 @@
+#!/bin/sh
+vol=$(pactl get-sink-volume @DEFAULT_SINK@ | grep -o '[0-9]\+%' | head -n1 | sed 's/%//')
+
+# If Speaker not muted, show volume icon, else show mute icon
+for vol in $vol;
+do
+    muteState=$(pactl get-sink-mute @DEFAULT_SINK@ | awk '{print $2}')
+    case $muteState in
+	"no") 
+	    if [ $vol -ge 80 ]; then
+		volicon=' 󰕾 '$vol'%'
+	    elif [ $vol -ge 50 ]; then
+		volicon=' 󰖀 '$vol'%'
+	    elif [ $vol -ge 10 ]; then
+		volicon=' 󰕿 '$vol'%'
+	    else
+		volicon=' 󰝞 '$vol'%'
+	    fi
+	    ;;
+	"yes")  volicon=' 󰝟 MUTED' ;;
+    esac
+
+# Set Mic icon based on mute state
+    case "$(pactl get-source-mute @DEFAULT_SOURCE@ | awk '{print $2}')" in
+	no) micicon="";;
+	yes) micicon="  " ;;
+    esac
+
+    printf "%s%s" "$volicon" "$micicon"
+done
