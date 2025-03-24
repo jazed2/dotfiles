@@ -1,2 +1,3 @@
 ./.config/runit/runsvdir
 .config/zsh/.zsh_hist
+.luarc.json
