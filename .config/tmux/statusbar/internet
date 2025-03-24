@@ -1,9 +1,9 @@
 #!/bin/sh
 
-if [ "$(cat /sys/class/net/w*/operstate)" = 'up' ] ; then
+if [ "$(cat /sys/class/net/w*/operstate)" = 'up' ]; then
 	wifiicon="󰖩 $(distrobox-host-exec iw dev wlp3s0 link | grep -i 'ssid' | awk -F ' ' '{print $2}')"
-elif [ "$(cat /sys/class/net/w*/operstate)" = 'down' ] ; then
-	[ "$(cat /sys/class/net/w*/flags)" = '0x1003' ] && wifiicon="󱚵 Disconnected" || wifiicon="󰖪 Unavailable"
+elif [ "$(cat /run/host/sys/class/net/w*/operstate)" = 'down' ]; then
+	[ "$(cat /run/host/sys/class/net/w*/flags)" = '0x1003' ] && wifiicon="󱚵 Disconnected" || wifiicon="󰖪 Unavailable"
 fi
 
 # VPN

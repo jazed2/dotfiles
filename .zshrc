@@ -61,3 +61,9 @@ source $HOME/.config/zsh/prompt.zsh
 
 # Replace linux cd with  (z)oxide 
 eval "$(zoxide init --cmd cd zsh)"
+
+# run dbox if exists in pwd
+if [ -f ./dbox ]; then 
+  ./dbox 
+fi
+
