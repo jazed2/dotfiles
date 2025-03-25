@@ -2,31 +2,17 @@
 # System aliases
 # ---------------------
 
-alias grubup="sudo update-grub"
-alias fixpacman="sudo rm /var/lib/pacman/db.lck"
 alias tarnow='tar -acf '
 alias untar='tar -zxvf '
 alias wget='wget -c '
-alias rmpkg="sudo pacman -Rdd"
 alias psmem='ps auxf | sort -nr -k 4'
 alias psmem10='ps auxf | sort -nr -k 4 | head -10'
 alias hw='hwinfo --short'                          # Hardware Info
 alias big="expac -H M '%m\t%n' | sort -h | nl"     # Sort installed packages according to size in MB (expac must be installed)
-alias gitpkg='pacman -Q | grep -i "\-git" | wc -l' # List amount of -git packages
 alias ip='ip -color'
-
-# Get fastest mirrors
-alias mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist"
-alias mirrord="sudo reflector --latest 50 --number 20 --sort delay --save /etc/pacman.d/mirrorlist"
-alias mirrors="sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist"
-alias mirrora="sudo reflector --latest 50 --number 20 --sort age --save /etc/pacman.d/mirrorlist"
 
 # Help people new to Arch
 alias helpme='cht.sh --shell'
-alias pacdiff='sudo -H DIFFPROG=meld pacdiff'
-
-# Cleanup orphaned packages
-alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
 
 # Get the error messages from journalctl
 alias jctl="journalctl -p 3 -xb"
@@ -50,11 +36,11 @@ alias zshrc="nvim ~/.config/zsh/"
 
 alias poweroff='sudo shutdown -h now' # -h flags halts system, different from normal arch behavior. Required in artix because impatience
 
-alias ls='lsd -al --color=always --group-directories-first  $1' # preferred listing
-alias la='lsd -a --color=always --group-directories-first  $1'  # all files and dirs
-alias ll='lsd -l --color=always --group-directories-first  $1'  # long format
-alias lt='lsd -a --tree --color=always --group-directories-first  $1' # tree listing
-alias l.='lsd -ald --color=always --group-directories-first  .*' # show only dotfiles
+alias ls='eza -al --color=always --group-directories-first  $1' # preferred listing
+alias la='eza -a --color=always --group-directories-first  $1'  # all files and dirs
+alias ll='eza -l --color=always --group-directories-first  $1'  # long format
+alias lt='eza -a --tree --color=always --group-directories-first  $1' # tree listing
+alias l.='eza -ald --color=always --group-directories-first  .*' # show only dotfiles
 
 alias lf='$HOME/.config/lf/lfub' # Wrapper script for previews using jstkdng/ueberzugpp
 

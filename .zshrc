@@ -61,3 +61,8 @@ source $HOME/.config/zsh/prompt.zsh
 
 # Replace linux cd with  (z)oxide 
 eval "$(zoxide init --cmd cd zsh)"
+
+# If dbox script exists, execute it.
+if [ -f $HOME/dbox ]; then
+	./dbox
+fi
