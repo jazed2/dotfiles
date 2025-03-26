@@ -65,3 +65,9 @@ alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 
 alias cat='bat --style header --style snip --style changes --style header' # Nice fomatting with colors
+
+# Distrobox aliases for ergonomics
+alias hostex='distrobox-host-exec'
+alias hostdo='distrobox-host-exec sudo'
+alias hostcompose="distrobox-host-exec sudo podman-compose"
+
