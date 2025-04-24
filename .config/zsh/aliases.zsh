@@ -71,3 +71,5 @@ alias hostex='distrobox-host-exec'
 alias hostdo='distrobox-host-exec sudo'
 alias hostcompose="distrobox-host-exec sudo podman-compose"
 
+# Run with nvidia gpu prefix
+alias nvidia_run='__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia' 
