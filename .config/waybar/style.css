@@ -36,10 +36,14 @@
 
 /* The whole bar */
 #waybar {
-	background: #000000;
+	background: rgba(0,0,0,0.0);
 	color: white;
 	font-family: JetBrainsMono Nerd Font;
 	font-size: 16px;
+
+	background-image: url("noise-texture-simplex-200x200.png");
+	background-repeat: repeat;
+	background-size: 200px 200px;
 }
 
 /* Each module */
@@ -115,7 +119,7 @@
 	padding-bottom: 2px;
 	padding-left: 10px;
 	padding-right: 10px;
-	color: #757575;
+	color: #D0D0D0;
 }
 
 #workspaces button.focused {
