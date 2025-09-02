@@ -67,3 +67,6 @@ if [ -f ./dbox ]; then
   ./dbox 
 fi
 
+# eval "$(starship init zsh)"
+
+# tmux -u attach || tmux -u new -s init

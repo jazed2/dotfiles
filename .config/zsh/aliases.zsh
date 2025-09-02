@@ -44,14 +44,16 @@ alias grep='rg --color=auto' # New fast grep
 alias fgrep='rg -F --color=auto' # String operation
 alias egrep='rg -E --color=auto' # Encoding
 
-alias n="nvim $1"
+alias h="helix $1"
+alias e="helix $1"
+
 alias vimrc="nvim ~/.config/nvim/"
 alias zshrc="nvim ~/.config/zsh/" 
 
 alias poweroff='sudo shutdown -h now' # -h flags halts system, different from normal arch behavior. Required in artix because impatience
 
 alias ls='eza -al --color=always --group-directories-first  $1' # preferred listing
-alias la='eza -a --color=always --group-directories-first  $1'  # all files and dirs
+alias l='eza -a --color=always --group-directories-first  $1'  # all files and dirs
 alias ll='eza -l --color=always --group-directories-first  $1'  # long format
 alias lt='eza -a --tree --color=always --group-directories-first  $1' # tree listing
 alias l.='eza -ald --color=always --group-directories-first  .*' # show only dotfiles
@@ -72,4 +74,4 @@ alias hostdo='distrobox-host-exec sudo'
 alias hostcompose="distrobox-host-exec sudo podman-compose"
 
 # Run with nvidia gpu prefix
-alias nvidia_run='__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia' 
+alias nvidia_run='__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia __VK_LAYER_NV_optimus=NVIDIA_only' 

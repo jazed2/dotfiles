@@ -4,7 +4,7 @@ dimensions = { columns = 100 , lines = 25 }
 padding = { x = 3, y = 3 }
 dynamic_padding = true
 startup_mode = "maximized"
-# opacity = 0.85
+# opacity = 0.80
 
 [font]
 normal = { family = "ComicShannsMonoNerdFont", style = "Regular" }
@@ -12,10 +12,10 @@ bold = { family = "ComicShannsMonoNerdFont", style = "Bold" }
 italic = { family = "ComicShannsMonoNerdFont", style = "Italic" }
 size = 14
 
-[general]
-import = [
-  "~/.config/alacritty/themes/themes/orangish.toml"
-]
+ [general]
+ import = [
+   "~/.config/alacritty/themes/themes/everfrost_dark.toml"
+ ]
 
 [terminal]
 
