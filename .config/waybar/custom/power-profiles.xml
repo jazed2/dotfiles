@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <object class="GtkMenu" id="menu">
+		<style>
+      <class name="menu-item"/>
+    </style>
+	<child>
+		<object class="GtkMenuItem" id="powersaver">
+			<property name="label">Power Saver</property>
+        </object>
+	</child>
+    <child>
+      <object class="GtkSeparatorMenuItem" id="delimiter1"/>
+    </child>
+	<child>
+        <object class="GtkMenuItem" id="balanced">
+			<property name="label">Balanced</property>
+        </object>
+	</child>
+    <child>
+      <object class="GtkSeparatorMenuItem" id="delimiter2"/>
+    </child>
+	<child>
+        <object class="GtkMenuItem" id="performance">
+			<property name="label">Performance</property>
+        </object>
+	</child>
+  </object>
+</interface>
+

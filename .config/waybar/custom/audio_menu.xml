@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <object class="GtkMenu" id="menu">
+		<style>
+      <class name="menu-item"/>
+    </style>
+	<child>
+		<object class="GtkMenuItem" id="volume_control">
+			<property name="label">Open Volume Control</property>
+        </object>
+	</child>
+    <child>
+      <object class="GtkSeparatorMenuItem" id="delimiter1"/>
+    </child>
+	<child>
+        <object class="GtkMenuItem" id="bluetooth">
+			<property name="label">Open Bluetooth Control</property>
+        </object>
+	</child>
+  </object>
+</interface>
+

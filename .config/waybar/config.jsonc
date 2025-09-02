@@ -1,0 +1,158 @@
+[
+	{
+		// -------------------------------------------------------------------------
+		// Global configuration
+		// -------------------------------------------------------------------------
+		"layer": "top",
+		"position": "top",
+		"modules-left": [
+			"niri/workspaces",
+			"niri/window"
+		],
+		"modules-center": [
+			"clock"
+		],
+		"modules-right": [
+			"network",
+			"backlight",
+			"pulseaudio",
+			"memory",
+			"cpu",
+			"battery"
+		],
+		// -------------------------------------------------------------------------
+		// Modules
+		// -------------------------------------------------------------------------
+		"battery": {
+			"interval": 2,
+			"states": {
+				"warning": 30,
+				"critical": 15
+			},
+			// Connected to AC
+			"format": "{icon} {capacity}%", // Icon: bolt
+			// Not connected to AC
+			"format-discharging": "{icon} {capacity}% ",
+			"format-icons": [
+				"", // Icon: battery-full
+				"", // Icon: battery-three-quarters
+				"", // Icon: battery-half
+				"", // Icon: battery-quarter
+				"" // Icon: battery-empty
+			],
+			"tooltip": true,
+			"menu": "on-click",
+			"menu-file": "~/.config/waybar/custom/power-profiles.xml",
+			"menu-actions": {
+				"powersaver": "powerprofilesctl set power-saver ; notify-send -t 100 'Power profile set to Power Saver'",
+				"balanced": "powerprofilesctl set balanced ; notify-send -t 100 'Power profile set to Balanced'",
+				"performance": "powerprofilesctl set performance; notify-send -t 100 'Power profile set to Performance'"
+			}
+		},
+		"clock": {
+			"interval": 60,
+			"format": " {:%H:%M [%a,%d]}",
+			"tooltip-format": "Click to open Google Calender",
+			"on-click-right": "mode"
+		},
+		"network": {
+			"interval": 5,
+			"format-wifi": "  {signalStrength}% ", // Icon: wifi
+			"format-ethernet": "  {ifname}: {ipaddr}/{cidr}", // Icon: ethernet
+			"format-disconnected": "  ",
+			"tooltip-format": "{essid}: {ipaddr}",
+			"on-click": "footclient nmtui"
+		},
+		"niri/window": {
+			"format": "  {title}",
+			"max-length": 50
+		},
+		"niri/workspaces": {
+			"format": "{}"
+		},
+		"pulseaudio": {
+			"interval": 5,
+			"format": " {icon} {volume}% ",
+			"format-bluetooth": " {icon} {volume}% ",
+			"format-muted": " --% ",
+			"format-icons": {
+				"headphones": "",
+				"handsfree": "",
+				"headset": "",
+				"phone": "",
+				"phone-muted": "",
+				"portable": "",
+				"default": [
+					"",
+					""
+				]
+			},
+			"scroll-step": 5,
+			"on-click-middle": "wpctl set-mute @DEFAULT_SINK@ toggle ",
+			"menu": "on-click",
+			"menu-file": "~/.config/waybar/custom/audio_menu.xml",
+			"menu-actions": {
+				"volume_control": "pavucontrol",
+				"bluetooth": "blueberry"
+			}
+		},
+		"backlight": {
+			"device": "intel_backlight",
+			"format": "  {percent}% ",
+			"min-brightness": 10,
+			"scroll-step": 10
+		},
+		"custom/diskspace": {},
+		"memory": {
+			"interval": 10,
+			"format": "  {used:0.1f}G "
+		},
+		"cpu": {
+			"interval": 1,
+			"format": "  {usage:>2}% "
+		}
+	},
+	{
+		"layer": "bottom",
+		"position": "bottom",
+		"height": 30,
+		"width": 2,
+		"modules-left": [
+			"custom/launcher",
+			"custom/seperator1"
+		],
+		"modules-center": [
+			"wlr/taskbar",
+			"custom/seperator2"
+		],
+		"modules-right": [
+			"tray"
+		],
+		"custom/launcher": {
+			"format": " ☰ Apps",
+			"on-click": "fuzzel --anchor bottom",
+			"tooltip": false
+		},
+		"wlr/taskbar": {
+			"markup": true,
+			"format": " {icon} ",
+			"icon-size": 25,
+			"spacing": 3,
+			"on-click": "activate",
+			"on-click-middle": "close",
+			"expand": true
+		},
+		"custom/seperator1": {
+			"markup": true,
+			"format": "<span color='#aaa'> <b>·</b> </span>"
+		},
+		"custom/seperator2": {
+			"markup": true,
+			"format": "<span color='#aaa'> <b>|</b> </span>"
+		},
+		"tray": {
+			"icon-size": 25,
+			"spacing": 15
+		}
+	}
+]

@@ -1,0 +1,72 @@
+theme = "jetbrains_dark"
+
+[editor]
+scrolloff = 10
+line-number = "relative"
+cursorline = true
+color-modes = true
+bufferline = "multiple"
+clipboard-provider = "wayland"
+end-of-line-diagnostics = "hint"
+
+[editor.statusline]
+left = ["mode","spinner","diagnostics"]
+center = ["read-only-indicator","file-name","file-modification-indicator"]
+right = ["selections", "position", "file-type","total-line-numbers"]
+separator = "│"
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+diagnostics = ["warning", "error"]
+workspace-diagnostics = ["warning", "error"]
+
+[editor.lsp]
+display-inlay-hints = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "block"
+
+[editor.soft-wrap]
+enable = true
+max-wrap = 25
+
+[keys.normal]
+"%" = "match_brackets"
+"*" = ["move_char_right", "move_prev_word_start", "move_next_word_end", "search_selection", "search_next"]
+"#" = ["move_char_right", "move_prev_word_start", "move_next_word_end", "search_selection", "search_prev"]
+"$" = "goto_line_end"
+0 = "goto_line_start"
+G = "goto_last_line"
+Z = {Z = ":write-quit", Q = ":quit!"}
+x = "select_line_below"
+X = "select_line_above"
+esc = ["collapse_selection","keep_primary_selection"]
+"{" = ["goto_prev_paragraph", "collapse_selection"]
+"}" = ["goto_next_paragraph", "collapse_selection"]
+"tab" = "goto_next_buffer"
+"S-tab" = "goto_previous_buffer"
+
+[keys.insert]
+j = { k = "normal_mode" }
+k = { j = "normal_mode" }
+
+[keys.select]
+"%" = "match_brackets"
+i = "select_textobject_inner"
+a = "select_textobject_around"
+"{" = "goto_prev_paragraph"
+"}" = "goto_next_paragraph"
+
+[keys.normal.";"]
+s = "hsplit"
+v = "vsplit"
+h = "jump_view_left"
+j = "jump_view_down"
+k = "jump_view_up"
+l = "jump_view_right"
+
+[keys.normal.space]
+l = ":toggle-option lsp.display-inlay-hints"
+b = { n = ":new", c = ":buffer-close", f = "buffer_picker"}

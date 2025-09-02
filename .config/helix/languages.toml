@@ -1,0 +1,8 @@
+[[language]]
+name = "markdown"
+language-servers = ["marksman"]
+
+[[language]]
+name = "typst"
+language-servers = ["tinymist"]
+
