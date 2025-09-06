@@ -46,6 +46,7 @@ alias egrep='rg -E --color=auto' # Encoding
 
 alias h="helix $1"
 alias e="helix $1"
+alias n="nvim $1"
 
 alias vimrc="nvim ~/.config/nvim/"
 alias zshrc="nvim ~/.config/zsh/" 

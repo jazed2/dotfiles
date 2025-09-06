@@ -36,14 +36,14 @@
 
 /* The whole bar */
 #waybar {
-	background: rgba(0,0,0,0.0);
+	background: rgba(0, 0, 0, 0.4);
 	color: white;
 	font-family: JetBrainsMono Nerd Font;
 	font-size: 16px;
 
-	background-image: url("noise-texture-simplex-200x200.png");
+	background-image: url("background_images/noise-texture-worley-1024x1024.png");
 	background-repeat: repeat;
-	background-size: 200px 200px;
+	background-size: 300px 300px;
 }
 
 /* Each module */
@@ -135,7 +135,6 @@
 
 #taskbar button {
 	color: lightgray;
-	background-color: black;
 }
 
 #taskbar button.active {

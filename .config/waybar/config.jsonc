@@ -144,11 +144,13 @@
 		},
 		"custom/seperator1": {
 			"markup": true,
-			"format": "<span color='#aaa'> <b>·</b> </span>"
+			"format": "<span color='#aaa'> <b>·</b> </span>",
+			"tooltip": false
 		},
 		"custom/seperator2": {
 			"markup": true,
-			"format": "<span color='#aaa'> <b>|</b> </span>"
+			"format": "<span color='#aaa'> <b>|</b> </span>",
+			"tooltip": false
 		},
 		"tray": {
 			"icon-size": 25,

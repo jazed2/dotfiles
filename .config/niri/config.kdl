@@ -262,7 +262,7 @@ layout {
 // This line starts waybar, a commonly used bar for Wayland compositors.
 // spawn-at-startup "mako"
 // spawn-at-startup "waybar"
-spawn-at-startup "bash" "/home/jazze/bin/lazystarter.sh"
+spawn-at-startup "bash" "/home/jazze/bin/lazystart.sh"
 // spawn-at-startup "alacritty" 
 // spawn-at-startup "foot" "-e" "zsh" "-c" "$(tmux -u attach || tmux -u new -s init)"
 
@@ -380,10 +380,10 @@ binds {
     Alt+Tab {spawn "~/bin/alt_tab_window_switcher.sh";}
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+Return hotkey-overlay-title="Open Terminal: foot" { spawn "footclient" "-a" "footmux" "-e" "zsh" "-c" "$(tmux -u attach || tmux -u new -s init)"; }
+    Mod+Return hotkey-overlay-title="Open Terminal: foot" { spawn "footclient" "-e" "zsh" "-c" "$(tmux -u attach || tmux -u new -s init)"; }
     Mod+Shift+Return {spawn "footclient";}
     Mod+Space hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+    Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylocker"; }
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument in the end.
