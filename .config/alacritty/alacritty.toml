@@ -7,9 +7,9 @@ startup_mode = "maximized"
 # opacity = 0.80
 
 [font]
-normal = { family = "ComicShannsMonoNerdFont", style = "Regular" }
-bold = { family = "ComicShannsMonoNerdFont", style = "Bold" }
-italic = { family = "ComicShannsMonoNerdFont", style = "Italic" }
+normal = { family = "JetBrainsMonoNerdFont", style = "Regular" }
+bold = { family = "JetBrainsMonoNerdFont", style = "Bold" }
+italic = { family = "JetBrainsMonoNerdFont", style = "Italic" }
 size = 14
 
  [general]
