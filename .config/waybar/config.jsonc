@@ -1,8 +1,5 @@
 [
 	{
-		// -------------------------------------------------------------------------
-		// Global configuration
-		// -------------------------------------------------------------------------
 		"layer": "top",
 		"position": "top",
 		"modules-left": [
@@ -17,12 +14,10 @@
 			"backlight",
 			"pulseaudio",
 			"memory",
+			"temperature",
 			"cpu",
 			"battery"
 		],
-		// -------------------------------------------------------------------------
-		// Modules
-		// -------------------------------------------------------------------------
 		"battery": {
 			"interval": 2,
 			"states": {
@@ -110,8 +105,14 @@
 		"cpu": {
 			"interval": 1,
 			"format": "  {usage:>2}% "
+		},
+		"temperature": {
+		  "critical-threshold": 80,
+		  "format-critical": "{temperatureC}°C ",
+		  "format": " {temperatureC}°C "
 		}
 	},
+	  // Bottom Panel	
 	{
 		"layer": "top",
 		"position": "bottom",
@@ -140,6 +141,8 @@
 			"spacing": 3,
 			"on-click": "activate",
 			"on-click-middle": "close",
+			"tooltip": true,
+			"tooltip-format": "{app_id}",
 			"expand": true
 		},
 		"custom/seperator1": {
